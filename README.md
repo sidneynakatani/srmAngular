@@ -1,4 +1,4 @@
-# srmJava
+# srmAngular
 Camada FrontEnd SRM
 
 
