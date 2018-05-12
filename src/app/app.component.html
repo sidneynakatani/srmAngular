@@ -1,0 +1,94 @@
+
+
+<div style="text-align:center">
+  <h1>
+    Welcome to {{title}}.
+  </h1>
+</div>
+
+
+
+
+
+<div class="container">
+  <div class="row">
+
+
+      <div class="col"> </div>
+
+      <div class="col">
+
+          <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">nome</th>
+                  <th scope="col">Limite de crédito</th>
+                  <th scope="col">Risco</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let person of clientList">
+
+                    <tr>
+                      <td> {{person.id}}</td>
+                      <td> {{person.nomeCliente}}</td>
+                      <td> {{person.limiteDeCredito | currency:'BRL':true }}</td>
+                      <td> {{person.risco}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+
+            <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
+
+              <div class="form-group">
+                <label>Nome</label>
+                <input type="text"
+                       class="form-control"
+                       aria-describedby="emailHelp"
+                       placeholder="Nome"
+                       formControlName="name"
+                       id="name">
+                <small id="emailHelp" class="form-text text-muted"> * Campo obrigatório.</small>
+              </div>
+
+              <div class="form-group">
+                  <label>Risco</label>
+                      <select id="risco"  formControlName="risco" class="form-control" required>
+                          <option *ngFor="let risco of riscos" [value]="risco">{{risco}}</option>
+                      </select>
+                    <small id="emailHelp" class="form-text text-muted"> * Campo obrigatório.</small>
+              </div>
+
+              <div class="form-group">
+                <label>Limite de crédito</label>
+                <input currencyMask
+                      class="form-control"
+                      [(ngModel)]="value"
+                      [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                      [ngModelOptions]="{standalone: true}"/>
+                <small id="emailHelp" class="form-text text-muted"> * Campo obrigatório.</small>
+              </div>
+
+
+              <div *ngIf="nameValidate" class="alert alert-danger" role="alert">
+                * Todos os campos são obrigatórios.
+              </div>
+
+              <div align="center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button onclick="window.location.href='/'" class="btn btn-primary">Atualizar Tabela</button>
+              </div>
+            </form>
+
+      </div>
+
+      <div class="col"></div>
+
+  </div>
+
+</div>
+
+
+
